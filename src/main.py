@@ -6,11 +6,11 @@ def start_game(name, directory):
     path_no_space = directory + '\\' + name + '\\' + name_no_space + '.exe'
     if os.path.exists(path):
         print(name)
-        # os.startfile(path)
+        os.startfile(path)
         return False
     elif os.path.exists(path_no_space):
         print(name)
-        # os.startfile(path_no_space)
+        os.startfile(path_no_space)
         return False
     return True
 

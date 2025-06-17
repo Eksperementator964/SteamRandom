@@ -1,0 +1,17 @@
+crash
+dowser
+setup
+vcredist
+driver
+java
+easyanticheat
+debug
+dotnet
+unins
+driver
+server
+python
+zsync
+downloader
+delete
+editor

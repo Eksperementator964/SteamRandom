@@ -1,15 +1,8 @@
 import os
 import random
+from searching import find_executables_steam, find_executable
 
-def find_executable(filenam, directory): #Поиск исполняемого файла
-    for dirpath, _, filenames in os.walk(directory + "\\" + filename):
-        for filename in filenames:
-            if filename.endswith('.exe'):
-                if check_for_words(filename):
-                    os.startfile(os.path.join(dirpath, filename))
-                    print(os.path.join(dirpath, filename))
-                    return False
-    return True
+
 
 def start_game():   #Запуск случайной игры
     directory_C = "C:\\Program Files (x86)\\Steam\\steamapps\\common"
@@ -43,14 +36,6 @@ def start_game():   #Запуск случайной игры
 
         else:
             x = start_game(folders_E[random_game_number - len(folders_C) - len(folders_D)], directory_E)
-
-def check_for_words(filename): 
-    with open("ignor_list.txt") as f:
-        ignor_list = [i.strip() for i in f]
-    for i in range(len(ignor_list)):
-        if filename.lower().find(ignor_list[i]) != -1:
-                return False
-    return True
 
 def init_procedure(): #Процедура инициализации программы
     pass

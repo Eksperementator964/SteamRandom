@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,qt,macos,visualstudiocode,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,qt,macos,visualstudiocode,windows
 
+*.json
+
 ### macOS ###
 # General
 .DS_Store

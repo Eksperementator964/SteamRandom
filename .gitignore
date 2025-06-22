@@ -3,7 +3,6 @@
 
 *.json
 config.cfg
-
 ### macOS ###
 # General
 .DS_Store

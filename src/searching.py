@@ -1,9 +1,13 @@
 import os
+import getpass
 from steam.client import SteamClient 
 from steam.enums import EResult
-import configparser 
+import configparser
+import json
 
-def find_executable(filenam, directory): #Поиск исполняемого файла
+from additionals import break_into_words
+
+def find_executable(filename, directory): #Поиск исполняемого файла
     for dirpath, _, filenames in os.walk(directory + "\\" + filename):
         for filename in filenames:
             if filename.endswith('.exe'):
@@ -28,6 +32,9 @@ def request_steam_data(app_ids: list) -> dict: #Получение конфиг�
     if login_result == EResult.OK:
         result = client.get_product_info(apps=app_ids)
         client.logout()
+        # if not result:
+        #     print("No game data!") #исправить!
+        #     return None
         return result['apps']
     else:
         print('ERROR!')
@@ -52,5 +59,21 @@ def get_executable_paths(app_ids: list) -> dict: # Получение пути �
     print(paths)
     return paths
 
+def get_lib_folders(path_start: str = f'/Users/{getpass.getuser()}/Library/Application Support/Steam/') -> list:
+    if not os.path.exists(path_start + 'steamapps/libraryfolders.vdf'):
+        return None
+    
+    paths = []
+    with open(path_start + 'steamapps/libraryfolders.vdf', mode='r') as vdfile:
+        data = vdfile.readlines()
+        for row in data:
+            if 'path' in row:
+                result = break_into_words(row)
+                paths.append((result[1] + '/steamapps/'))
+    return paths
+
+def build_paths(app_ids: list) -> dict:
+    pass
+
 if __name__ == '__main__':
-    get_executable_paths([413150, 310360, 1286710])
+    print(get_lib_folders())

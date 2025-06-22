@@ -1,6 +1,8 @@
 import os
 import random
-from searching import find_executables_steam, find_executable
+from searching import find_executable, get_executable_paths
+import configparser
+import getpass
 
 
 
@@ -39,7 +41,8 @@ def start_game():   #Запуск случайной игры
 
 def init_procedure(): #Процедура инициализации программы
     pass
+    
 
 
 if __name__ == '__main__':
-    pass
+    init_procedure()

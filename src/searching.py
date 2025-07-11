@@ -110,13 +110,14 @@ def get_apps_info() -> dict:
     apps = {}
 
     for lib_path in lib_folders_paths:
-        dir_data = os.scandir(lib_path)
-        for file in dir_data:
-            filename = file.name
-            if filename.endswith('.acf'):
-                id = filename[filename.find('_') + 1:filename.find('.acf')]
-                apps[id] = read_acf_file(lib_path + file.name)
-                apps[id]['installdir'] = lib_path + 'common/' + apps[id]['installdir']
+        if os.path.exists(lib_path):
+            dir_data = os.scandir(lib_path)
+            for file in dir_data:
+                filename = file.name
+                if filename.endswith('.acf'):
+                    id = filename[filename.find('_') + 1:filename.find('.acf')]
+                    apps[id] = read_acf_file(lib_path + file.name)
+                    apps[id]['installdir'] = lib_path + 'common/' + apps[id]['installdir']
     return apps
 
 def read_acf_file(filename: str) -> dict:

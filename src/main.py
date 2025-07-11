@@ -1,8 +1,6 @@
 import os
 import random
 from searching import find_executable, get_executable_paths
-import configparser
-import getpass
 
 
 

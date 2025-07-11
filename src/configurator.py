@@ -21,10 +21,11 @@ def set_os(new_os:str):
             parser.write(cfgfile)
 
 def get_default_steamapps_path():
-    parser = configparser.ConfigParser()
-    parser.read('defaults.cfg')
+    with open('defaults.json', mode='r') as dftfile:
+        dft_data = json.load(dftfile)
+
     os_name = get_os_name()
-    res_path = parser['STEAMPATH'][os_name]
+    res_path = dft_data['steampath'][os_name]
     if os_name == 'macos':
         res_path = f'/Users/{getpass.getuser()}/' + res_path
 
@@ -37,9 +38,10 @@ def global_cofiguration():
     data = {}
     data['os'] = get_os_name()
     data['default_path'] = get_default_steamapps_path()
+    with open('defaults.json', mode='r') as dftfile:
+        dft_data = json.load(dftfile)
+    data['launch'] = dft_data['launch'][data['os']]
     data['apps'] = {}
-
-    find_games()
 
     with open('config.json', mode='w') as configfile:
         json.dump(data, configfile)

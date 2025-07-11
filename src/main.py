@@ -1,7 +1,10 @@
 import os
 import random
-from searching import find_executable, get_executable_paths
+import json
+import subprocess
 
+from configurator import global_cofiguration
+from searching import find_games
 
 
 def start_game():   #Запуск случайной игры
@@ -38,9 +41,17 @@ def start_game():   #Запуск случайной игры
             x = start_game(folders_E[random_game_number - len(folders_C) - len(folders_D)], directory_E)
 
 def init_procedure(): #Процедура инициализации программы
-    pass
-    
+    if not os.path.exists('config.json'):
+        global_cofiguration()
+    find_games()
 
+def choose_random_game() -> str:
+    with open('config.json', mode='r') as cfgfile:
+        data = json.load(cfgfile)
+    keys = list(data['apps'].keys())
+    chosen_app = data['apps'][random.choice(keys)]
+    print(f'Выбранная игра: {chosen_app['name']}')
+    subprocess.Popen(data['launch'] + [chosen_app['installdir']])
 
 if __name__ == '__main__':
-    init_procedure()
+    choose_random_game()

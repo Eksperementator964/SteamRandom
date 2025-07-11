@@ -22,7 +22,7 @@ def find_games() -> str:
     if not apps_to_add:
         return "No need to add/modify games' paths"
     
-    
+
     exe_paths = get_steam_executables(apps_to_add)
     for app_id in exe_paths:
         apps[str(app_id)]['installdir'] = apps[str(app_id)]['installdir'] + '/' + exe_paths[app_id]
@@ -67,7 +67,7 @@ def request_steam_data(app_ids: list) -> dict: #Получение конфиг�
         print('ERROR!')
         return None
 
-def get_steam_executables(app_ids: list) -> dict: # Получение пути до исполняемого файла ПЕРЕПИСАТЬ ПОД НОВЫЙ КОНФИГ
+def get_steam_executables(app_ids: list) -> dict: # Получение пути до исполняемого файла
     with open('config.json', mode='r') as cfgfile:
         data = json.load(cfgfile)
 
@@ -85,7 +85,7 @@ def get_steam_executables(app_ids: list) -> dict: # Получение пути 
             paths[id] = 'None'
     return paths
 
-def get_lib_folders() -> list:
+def get_lib_folders() -> list: 
     if not os.path.exists('config.json'):
         return 'Config file was not found!'
     

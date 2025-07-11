@@ -1,0 +1,15 @@
+{
+    "steampath": {
+        "macos": "Library/Application Support/Steam/",
+        "windows": "C:/Program Files (x86)/Steam/",
+        "linux": "null"
+    },
+    "launch": {
+        "macos": [
+            "open",
+            "-a"
+        ],
+        "windows": [],
+        "linux": []
+    }
+}
